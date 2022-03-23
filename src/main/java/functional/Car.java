@@ -48,7 +48,7 @@ public class Car {
                 "gasLevel=" + gasLevel +
                 ", colour='" + colour + '\'' +
                 ", passengers=" + passengers +
-                (trunkContents != null ? ", trunkContents=" + trunkContents : "no trunk") +
+                (trunkContents != null ? ", trunkContents=" + trunkContents : " no trunk") +
                 '}';
     }
 }
