@@ -13,6 +13,30 @@ import java.util.List;
 //    }
 //}
 
+interface CarCriterion {
+    boolean test(Car c);  // do you like this one?
+}
+
+class RedCarCriterion implements CarCriterion {
+
+    @Override
+    public boolean test(Car c) {
+        return c.getColour().equals("Red"); // yes if and only if its colour is red
+    }
+}
+
+class GasLevelCarCriterion implements CarCriterion {
+    private int threshold;
+    public GasLevelCarCriterion(int threshold) {
+        this.threshold = threshold;
+    }
+
+    @Override
+    public boolean test(Car c) {
+        return c.getGasLevel() >= threshold;
+    }
+}
+
 public class CarDemo {
     public static void showAll(List<Car> cars) {
         for (Car car : cars) {
@@ -22,24 +46,14 @@ public class CarDemo {
     }
 
     // Iterable instead of List for best practice
-    public static List<Car> getCarsByColour(Iterable<Car> cars, String colour) {
+    public static List<Car> getCarsByCriterion(Iterable<Car> cars, CarCriterion crit) {
         List<Car> carsByColour = new ArrayList<>();
         for (Car car : cars) {
-            if (car.getColour().equals(colour)) {
+            if (crit.test(car)) {
                 carsByColour.add(car);
             }
         }
         return carsByColour;
-    }
-
-    public static List<Car> getCarsByGasLevel(Iterable<Car> cars, int gasLevel) {
-        List<Car> carsByGasLevel = new ArrayList<>();
-        for (Car car : cars) {
-            if (car.getGasLevel() >= gasLevel) {
-                carsByGasLevel.add(car);
-            }
-        }
-        return carsByGasLevel;
     }
 
     public static void main(String[] args) {
@@ -52,10 +66,9 @@ public class CarDemo {
         );
         System.out.println("This is printed by ShowAll(cars)");
         showAll(cars);
-        showAll(getCarsByColour(cars, "Red"));
-        showAll(getCarsByColour(cars, "Black"));
-        cars.sort(new PassengerCountOrder());
-        showAll(cars);
+        showAll(getCarsByCriterion(cars, new RedCarCriterion()));
+        showAll(getCarsByCriterion(cars, new GasLevelCarCriterion(6)));
+//        cars.sort(new PassengerCountOrder());
 
     }
 }
