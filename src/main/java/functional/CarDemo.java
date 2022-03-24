@@ -49,6 +49,8 @@ public class CarDemo {
         showAll(getCarsByCriterion(cars, Car.getRedCarCriterion()));
         showAll(getCarsByCriterion(cars, Car.getGasLevelCarCriterion(6)));
 //        cars.sort(new PassengerCountOrder());
+        cars.sort(Car.getGasComparator());
+        showAll(cars);
 
     }
 }
