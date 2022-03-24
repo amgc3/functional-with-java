@@ -62,16 +62,26 @@ public class Car {
         // return new RedCarCriterion();
         return RED_CAR_CRITERION;
     }
-    private static final RedCarCriterion RED_CAR_CRITERION = new RedCarCriterion();
-    static class RedCarCriterion implements CarCriterion {
+    private static final CarCriterion RED_CAR_CRITERION = new CarCriterion() {
 
         @Override
         public boolean test(Car c) {
-            return c.colour.equals("Red"); // yes if and only if its colour is red
+            return c.colour.equals("Red");
         }
-    }
+    };
+//    private static final CarCriterion RED_CAR_CRITERION = new /* RedCarCriterion();
+//    private static class RedCarCriterion implements */ CarCriterion() {
+//
+//        @Override
+//        public boolean test(Car c) {
+//            return c.colour.equals("Red");
+//        }
+//    };
 
-    static class GasLevelCarCriterion implements CarCriterion {
+    public static CarCriterion getGasLevelCarCriterion(int threshold) {
+        return new GasLevelCarCriterion(threshold);
+    }
+    private static class GasLevelCarCriterion implements CarCriterion {
         private int threshold;
         public GasLevelCarCriterion(int threshold) {
             this.threshold = threshold;

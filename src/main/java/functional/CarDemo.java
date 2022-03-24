@@ -46,8 +46,8 @@ public class CarDemo {
         );
         System.out.println("This is printed by ShowAll(cars)");
         showAll(cars);
-        showAll(getCarsByCriterion(cars, Car.getRedCarCriterion())); // access field directly
-        showAll(getCarsByCriterion(cars, new Car.GasLevelCarCriterion(6)));
+        showAll(getCarsByCriterion(cars, Car.getRedCarCriterion()));
+        showAll(getCarsByCriterion(cars, Car.getGasLevelCarCriterion(6)));
 //        cars.sort(new PassengerCountOrder());
 
     }
