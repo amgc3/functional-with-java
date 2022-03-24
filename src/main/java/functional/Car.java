@@ -101,13 +101,17 @@ public class Car {
         return gasComparator;
     }
 
-    private static final Comparator<Car> gasComparator = new Comparator<Car>() {
-
-        @Override
-        public int compare(Car o1, Car o2) {
+    private static final Comparator<Car> gasComparator = (Car o1, Car o2) -> {
             return o1.gasLevel - o2.gasLevel;
-        }
     };
+
+//    private static final Comparator<Car> gasComparator = new Comparator<Car>() {
+//
+//        @Override
+//        public int compare(Car o1, Car o2) {
+//            return o1.gasLevel - o2.gasLevel;
+//        }
+//    };
 //    private static final Comparator<Car> gasComparator = new CarGasComparator();
 //    private static class CarGasComparator implements Comparator<Car> {
 //
