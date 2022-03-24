@@ -17,26 +17,6 @@ interface CarCriterion {
     boolean test(Car c);  // do you like this one?
 }
 
-class RedCarCriterion implements CarCriterion {
-
-    @Override
-    public boolean test(Car c) {
-        return c.getColour().equals("Red"); // yes if and only if its colour is red
-    }
-}
-
-class GasLevelCarCriterion implements CarCriterion {
-    private int threshold;
-    public GasLevelCarCriterion(int threshold) {
-        this.threshold = threshold;
-    }
-
-    @Override
-    public boolean test(Car c) {
-        return c.getGasLevel() >= threshold;
-    }
-}
-
 public class CarDemo {
     public static void showAll(List<Car> cars) {
         for (Car car : cars) {
@@ -66,8 +46,8 @@ public class CarDemo {
         );
         System.out.println("This is printed by ShowAll(cars)");
         showAll(cars);
-        showAll(getCarsByCriterion(cars, new RedCarCriterion()));
-        showAll(getCarsByCriterion(cars, new GasLevelCarCriterion(6)));
+        showAll(getCarsByCriterion(cars, Car.getRedCarCriterion())); // access field directly
+        showAll(getCarsByCriterion(cars, new Car.GasLevelCarCriterion(6)));
 //        cars.sort(new PassengerCountOrder());
 
     }

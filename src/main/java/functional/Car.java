@@ -51,4 +51,35 @@ public class Car {
                 (trunkContents != null ? ", trunkContents=" + trunkContents : " no trunk") +
                 '}';
     }
+
+    /*
+     this factory method always returns the same object no matter how many times it's called
+     singleton pattern - so we have created a reusable object
+     another advantage over using a constructor is being able to return an object that is
+     assignment compatible with the return type of the factory method
+    */
+    public static CarCriterion getRedCarCriterion() {
+        // return new RedCarCriterion();
+        return RED_CAR_CRITERION;
+    }
+    private static final RedCarCriterion RED_CAR_CRITERION = new RedCarCriterion();
+    static class RedCarCriterion implements CarCriterion {
+
+        @Override
+        public boolean test(Car c) {
+            return c.colour.equals("Red"); // yes if and only if its colour is red
+        }
+    }
+
+    static class GasLevelCarCriterion implements CarCriterion {
+        private int threshold;
+        public GasLevelCarCriterion(int threshold) {
+            this.threshold = threshold;
+        }
+
+        @Override
+        public boolean test(Car c) {
+            return c.gasLevel >= threshold;
+        }
+    }
 }
