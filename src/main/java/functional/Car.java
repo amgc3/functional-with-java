@@ -85,22 +85,35 @@ public class Car {
 //            return c.colour.equals("Red");
 //        }
 //    };
-
     public static Criterion<Car> getGasLevelCarCriterion(int threshold) {
-        return new GasLevelCarCriterion(threshold);
-    }
+    return c -> c.gasLevel >= threshold;
+}
 
-    private static class GasLevelCarCriterion implements Criterion<Car> {
-        private int threshold;
-        public GasLevelCarCriterion(int threshold) {
-            this.threshold = threshold;
-        }
 
-        @Override
-        public boolean test(Car c) {
-            return c.gasLevel >= threshold;
-        }
-    }
+//    public static Criterion<Car> getGasLevelCarCriterion(int threshold) {
+//        return new Criterion<Car>() {
+//            @Override
+//            public boolean test(Car c) {
+//                return c.gasLevel >= threshold;
+//            }
+//        };
+//    }
+
+//    public static Criterion<Car> getGasLevelCarCriterion(int threshold) {
+//        return new GasLevelCarCriterion(threshold);
+//    }
+//
+//    private static class GasLevelCarCriterion implements Criterion<Car> {
+//        private int threshold;
+//        public GasLevelCarCriterion(int threshold) {
+//            this.threshold = threshold;
+//        }
+//
+//        @Override
+//        public boolean test(Car c) {
+//            return c.gasLevel >= threshold;
+//        }
+//    }
 
     public static Comparator<Car> getGasComparator() {
         return gasComparator;

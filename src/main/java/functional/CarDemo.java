@@ -49,7 +49,10 @@ public class CarDemo {
         showAll(cars);
         System.out.println("Red cars:");
         showAll(getByCriterion(cars, Car.getRedCarCriterion()));
-        showAll(getByCriterion(cars, Car.getGasLevelCarCriterion(6)));
+        System.out.println(("By gas level >= 7:"));
+        showAll(getByCriterion(cars, Car.getGasLevelCarCriterion(7)));
+        System.out.println(("By gas level >= 4:"));
+        showAll(getByCriterion(cars, Car.getGasLevelCarCriterion(4)));
 //        cars.sort(new PassengerCountOrder());
         cars.sort(Car.getGasComparator());
         showAll(cars);
@@ -59,13 +62,14 @@ public class CarDemo {
         showAll(getByCriterion(cars, Car.getFourPassengerCriterion()));
 
         // just some examples
-        List<String> colours = Arrays.asList("Red", "LightBlue", "Orange", "Silver", "purple", "LightCoral");
-        showAll(getByCriterion(colours, str -> str.length() > 4));
-        showAll(getByCriterion(colours, str -> Character.isUpperCase(str.charAt(0))));
+//        List<String> colours = Arrays.asList("Red", "LightBlue", "Orange", "Silver", "purple", "LightCoral");
+//        showAll(getByCriterion(colours, str -> str.length() > 4));
+//        showAll(getByCriterion(colours, str -> Character.isUpperCase(str.charAt(0))));
+//
+//        LocalDate today = LocalDate.now();
+//        List<LocalDate> dates = Arrays.asList(today, today.plusDays(1), today.plusDays(7), today.minusDays(1));
+//        showAll(getByCriterion(dates, ld -> ld.isAfter(today)));
 
-        LocalDate today = LocalDate.now();
-        List<LocalDate> dates = Arrays.asList(today, today.plusDays(1), today.plusDays(7), today.minusDays(1));
-        showAll(getByCriterion(dates, ld -> ld.isAfter(today)));
 
 
 
