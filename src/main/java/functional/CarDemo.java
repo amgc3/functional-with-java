@@ -19,6 +19,10 @@ interface Criterion<E> {
 }
 
 public class CarDemo {
+    public static <E> Criterion<E> negate(Criterion<E> crit) {
+        return x -> !crit.test(x);
+
+    }
     public static <E> void showAll(List<E> list) {
         for (E item : list) {
             System.out.println(item);
@@ -70,6 +74,10 @@ public class CarDemo {
 //        List<LocalDate> dates = Arrays.asList(today, today.plusDays(1), today.plusDays(7), today.minusDays(1));
 //        showAll(getByCriterion(dates, ld -> ld.isAfter(today)));
         showAll(getByCriterion(cars, Car.getColourCriterion("Red", "Black")));
+        Criterion<Car> level7 = Car.getGasLevelCarCriterion(7);
+        showAll(getByCriterion(cars, level7));
+        Criterion<Car> notLevel7 = CarDemo.negate(level7);
+        showAll(getByCriterion(cars, notLevel7));
 
 
 
