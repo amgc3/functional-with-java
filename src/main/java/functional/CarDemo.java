@@ -2,7 +2,6 @@ package functional;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Comparator;
 import java.util.List;
 
 //class PassengerCountOrder implements Comparator<Car> {
@@ -14,27 +13,27 @@ import java.util.List;
 //}
 
 @FunctionalInterface
-interface CarCriterion {
-    boolean test(Car c);  // do you like this one?
+interface Criterion<E> {
+    boolean test(E c);
 }
 
 public class CarDemo {
-    public static void showAll(List<Car> cars) {
-        for (Car car : cars) {
-            System.out.println(car);
+    public static <E> void showAll(List<E> list) {
+        for (E item : list) {
+            System.out.println(list);
         }
         System.out.println("------------------------------");
     }
 
     // Iterable instead of List for best practice
-    public static List<Car> getCarsByCriterion(Iterable<Car> cars, CarCriterion crit) {
-        List<Car> carsByColour = new ArrayList<>();
-        for (Car car : cars) {
-            if (crit.test(car)) {
-                carsByColour.add(car);
+    public static <E> List<E> getByCriterion(Iterable<E> in, Criterion<E> crit) {
+        List<E> output = new ArrayList<>();
+        for (E item : in) {
+            if (crit.test(item)) {
+                output.add(item);
             }
         }
-        return carsByColour;
+        return output;
     }
 
     public static void main(String[] args) {
@@ -48,15 +47,15 @@ public class CarDemo {
         System.out.println("This is printed by ShowAll(cars)");
         showAll(cars);
         System.out.println("Red cars:");
-        showAll(getCarsByCriterion(cars, Car.getRedCarCriterion()));
-        showAll(getCarsByCriterion(cars, Car.getGasLevelCarCriterion(6)));
+        showAll(getByCriterion(cars, Car.getRedCarCriterion()));
+        showAll(getByCriterion(cars, Car.getGasLevelCarCriterion(6)));
 //        cars.sort(new PassengerCountOrder());
         cars.sort(Car.getGasComparator());
         showAll(cars);
         System.out.println("Two passengers:");
-        showAll(getCarsByCriterion(cars, c-> c.getPassengers().size() == 2));
+        showAll(getByCriterion(cars, c-> c.getPassengers().size() == 2));
         System.out.println("Four passengers:");
-        showAll(getCarsByCriterion(cars, Car.getFourPassengerCriterion()));
+        showAll(getByCriterion(cars, Car.getFourPassengerCriterion()));
 
     }
 }

@@ -54,7 +54,7 @@ public class Car {
     }
 
 
-    public static CarCriterion getFourPassengerCriterion() {
+    public static Criterion<Car> getFourPassengerCriterion() {
         return c -> c.getPassengers().size() == 4;
     }
     /*
@@ -63,11 +63,11 @@ public class Car {
      another advantage over using a constructor is being able to return an object that is
      assignment compatible with the return type of the factory method
     */
-    public static CarCriterion getRedCarCriterion() {
+    public static Criterion<Car> getRedCarCriterion() {
         // return new RedCarCriterion();
         return RED_CAR_CRITERION;
     }
-    private static final CarCriterion RED_CAR_CRITERION = c -> c.colour.equals("Red");
+    private static final Criterion<Car> RED_CAR_CRITERION = c -> c.colour.equals("Red");
 
 
 //    private static final CarCriterion RED_CAR_CRITERION = new CarCriterion() {
@@ -86,10 +86,11 @@ public class Car {
 //        }
 //    };
 
-    public static CarCriterion getGasLevelCarCriterion(int threshold) {
+    public static Criterion<Car> getGasLevelCarCriterion(int threshold) {
         return new GasLevelCarCriterion(threshold);
     }
-    private static class GasLevelCarCriterion implements CarCriterion {
+
+    private static class GasLevelCarCriterion implements Criterion<Car> {
         private int threshold;
         public GasLevelCarCriterion(int threshold) {
             this.threshold = threshold;
