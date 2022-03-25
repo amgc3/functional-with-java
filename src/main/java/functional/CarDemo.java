@@ -1,5 +1,6 @@
 package functional;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -20,7 +21,7 @@ interface Criterion<E> {
 public class CarDemo {
     public static <E> void showAll(List<E> list) {
         for (E item : list) {
-            System.out.println(list);
+            System.out.println(item);
         }
         System.out.println("------------------------------");
     }
@@ -56,6 +57,18 @@ public class CarDemo {
         showAll(getByCriterion(cars, c-> c.getPassengers().size() == 2));
         System.out.println("Four passengers:");
         showAll(getByCriterion(cars, Car.getFourPassengerCriterion()));
+
+        // just some examples
+        List<String> colours = Arrays.asList("Red", "LightBlue", "Orange", "Silver", "purple", "LightCoral");
+        showAll(getByCriterion(colours, str -> str.length() > 4));
+        showAll(getByCriterion(colours, str -> Character.isUpperCase(str.charAt(0))));
+
+        LocalDate today = LocalDate.now();
+        List<LocalDate> dates = Arrays.asList(today, today.plusDays(1), today.plusDays(7), today.minusDays(1));
+        showAll(getByCriterion(dates, ld -> ld.isAfter(today)));
+
+
+
 
     }
 }
