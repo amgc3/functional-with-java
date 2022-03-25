@@ -69,16 +69,16 @@ public class CarDemo {
         showAll(getByCriterion(cars, Car.getColourCriterion("Red", "Black")));
         Criterion<Car> level7 = Car.getGasLevelCarCriterion(7);
         showAll(getByCriterion(cars, level7));
-        Criterion<Car> notLevel7 = Criterion.negate(level7);
+        Criterion<Car> notLevel7 = level7.negate();
         showAll(getByCriterion(cars, notLevel7));
 
         Criterion<Car> isRed = Car.getColourCriterion("Red");
         Criterion<Car> fourPassengers = Car.getFourPassengerCriterion();
 
-        Criterion<Car> redFourPassengers = Criterion.and(isRed, fourPassengers);
+        Criterion<Car> redFourPassengers = isRed.and(fourPassengers);
         showAll(getByCriterion(cars, redFourPassengers));
         Criterion<Car> isBlack = Car.getColourCriterion("Black");
-        Criterion<Car> blackOrFourPassengers = Criterion.or(isBlack, fourPassengers);
+        Criterion<Car> blackOrFourPassengers = isBlack.or(fourPassengers);
         showAll(getByCriterion(cars, blackOrFourPassengers));
 
 
