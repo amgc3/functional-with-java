@@ -69,6 +69,7 @@ public class CarDemo {
 //        LocalDate today = LocalDate.now();
 //        List<LocalDate> dates = Arrays.asList(today, today.plusDays(1), today.plusDays(7), today.minusDays(1));
 //        showAll(getByCriterion(dates, ld -> ld.isAfter(today)));
+        showAll(getByCriterion(cars, Car.getColourCriterion("Red", "Black")));
 
 
 

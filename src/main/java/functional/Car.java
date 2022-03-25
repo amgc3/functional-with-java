@@ -1,9 +1,6 @@
 package functional;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 
 public class Car {
     private final int gasLevel;
@@ -63,6 +60,12 @@ public class Car {
      another advantage over using a constructor is being able to return an object that is
      assignment compatible with the return type of the factory method
     */
+
+    public static Criterion<Car> getColourCriterion(String ... colours) {
+        Set<String> colourSet = new HashSet<>(Arrays.asList(colours));
+        return c -> colourSet.contains(c.colour);
+
+    }
     public static Criterion<Car> getRedCarCriterion() {
         // return new RedCarCriterion();
         return RED_CAR_CRITERION;
