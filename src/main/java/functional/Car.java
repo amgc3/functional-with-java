@@ -53,6 +53,10 @@ public class Car {
                 '}';
     }
 
+
+    public static CarCriterion getFourPassengerCriterion() {
+        return c -> c.getPassengers().size() == 4;
+    }
     /*
      this factory method always returns the same object no matter how many times it's called
      singleton pattern - so we have created a reusable object
@@ -101,9 +105,8 @@ public class Car {
         return gasComparator;
     }
 
-    private static final Comparator<Car> gasComparator = (Car o1, Car o2) -> {
-            return o1.gasLevel - o2.gasLevel;
-    };
+    private static final Comparator<Car> gasComparator =
+            (o1, o2) -> o1.gasLevel - o2.gasLevel;
 
 //    private static final Comparator<Car> gasComparator = new Comparator<Car>() {
 //

@@ -13,6 +13,7 @@ import java.util.List;
 //    }
 //}
 
+@FunctionalInterface
 interface CarCriterion {
     boolean test(Car c);  // do you like this one?
 }
@@ -46,11 +47,16 @@ public class CarDemo {
         );
         System.out.println("This is printed by ShowAll(cars)");
         showAll(cars);
+        System.out.println("Red cars:");
         showAll(getCarsByCriterion(cars, Car.getRedCarCriterion()));
         showAll(getCarsByCriterion(cars, Car.getGasLevelCarCriterion(6)));
 //        cars.sort(new PassengerCountOrder());
         cars.sort(Car.getGasComparator());
         showAll(cars);
+        System.out.println("Two passengers:");
+        showAll(getCarsByCriterion(cars, c-> c.getPassengers().size() == 2));
+        System.out.println("Four passengers:");
+        showAll(getCarsByCriterion(cars, Car.getFourPassengerCriterion()));
 
     }
 }
