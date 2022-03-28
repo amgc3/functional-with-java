@@ -1,9 +1,9 @@
 package functional;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.function.Predicate;
 
 //class PassengerCountOrder implements Comparator<Car> {
 //
@@ -24,7 +24,7 @@ public class CarDemo {
     }
 
     // Iterable instead of List for best practice
-    public static <E> List<E> getByCriterion(Iterable<E> in, Criterion<E> crit) {
+    public static <E> List<E> getByCriterion(Iterable<E> in, Predicate<E> crit) {
         List<E> output = new ArrayList<>();
         for (E item : in) {
             if (crit.test(item)) {
@@ -67,18 +67,18 @@ public class CarDemo {
 //        List<LocalDate> dates = Arrays.asList(today, today.plusDays(1), today.plusDays(7), today.minusDays(1));
 //        showAll(getByCriterion(dates, ld -> ld.isAfter(today)));
         showAll(getByCriterion(cars, Car.getColourCriterion("Red", "Black")));
-        Criterion<Car> level7 = Car.getGasLevelCarCriterion(7);
+        Predicate<Car> level7 = Car.getGasLevelCarCriterion(7);
         showAll(getByCriterion(cars, level7));
-        Criterion<Car> notLevel7 = level7.negate();
+        Predicate<Car> notLevel7 = level7.negate();
         showAll(getByCriterion(cars, notLevel7));
 
-        Criterion<Car> isRed = Car.getColourCriterion("Red");
-        Criterion<Car> fourPassengers = Car.getFourPassengerCriterion();
+        Predicate<Car> isRed = Car.getColourCriterion("Red");
+        Predicate<Car> fourPassengers = Car.getFourPassengerCriterion();
 
-        Criterion<Car> redFourPassengers = isRed.and(fourPassengers);
+        Predicate<Car> redFourPassengers = isRed.and(fourPassengers);
         showAll(getByCriterion(cars, redFourPassengers));
-        Criterion<Car> isBlack = Car.getColourCriterion("Black");
-        Criterion<Car> blackOrFourPassengers = isBlack.or(fourPassengers);
+        Predicate<Car> isBlack = Car.getColourCriterion("Black");
+        Predicate<Car> blackOrFourPassengers = isBlack.or(fourPassengers);
         showAll(getByCriterion(cars, blackOrFourPassengers));
 
 

@@ -1,6 +1,12 @@
 package functional;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+import java.util.function.Predicate;
 
 public class Car {
     private final int gasLevel;
@@ -51,7 +57,7 @@ public class Car {
     }
 
 
-    public static Criterion<Car> getFourPassengerCriterion() {
+    public static Predicate<Car> getFourPassengerCriterion() {
         return c -> c.getPassengers().size() == 4;
     }
     /*
@@ -61,16 +67,16 @@ public class Car {
      assignment compatible with the return type of the factory method
     */
 
-    public static Criterion<Car> getColourCriterion(String ... colours) {
+    public static Predicate<Car> getColourCriterion(String ... colours) {
         Set<String> colourSet = new HashSet<>(Arrays.asList(colours));
         return c -> colourSet.contains(c.colour);
 
     }
-    public static Criterion<Car> getRedCarCriterion() {
+    public static Predicate<Car> getRedCarCriterion() {
         // return new RedCarCriterion();
         return RED_CAR_CRITERION;
     }
-    private static final Criterion<Car> RED_CAR_CRITERION = c -> c.colour.equals("Red");
+    private static final Predicate<Car> RED_CAR_CRITERION = c -> c.colour.equals("Red");
 
 
 //    private static final CarCriterion RED_CAR_CRITERION = new CarCriterion() {
@@ -88,7 +94,7 @@ public class Car {
 //            return c.colour.equals("Red");
 //        }
 //    };
-    public static Criterion<Car> getGasLevelCarCriterion(int threshold) {
+    public static Predicate<Car> getGasLevelCarCriterion(int threshold) {
     return c -> c.gasLevel >= threshold;
 }
 
