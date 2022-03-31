@@ -2,8 +2,10 @@ package functional;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 import java.util.function.Predicate;
+import java.util.function.ToIntFunction;
 
 //class PassengerCountOrder implements Comparator<Car> {
 //
@@ -15,6 +17,15 @@ import java.util.function.Predicate;
 
 
 public class CarDemo {
+
+    public static <E>ToIntFunction<E> compareWithThis(E target, Comparator<E> comp) {
+        return x -> comp.compare(target, x);
+
+    }
+
+    public static <E> Predicate<E> comparesGreater(ToIntFunction<E> comp) {
+        return x -> comp.applyAsInt(x) < 0;
+    }
 
     public static <E> void showAll(List<E> list) {
         for (E item : list) {
@@ -80,6 +91,15 @@ public class CarDemo {
         Predicate<Car> isBlack = Car.getColourCriterion("Black");
         Predicate<Car> blackOrFourPassengers = isBlack.or(fourPassengers);
         showAll(getByCriterion(cars, blackOrFourPassengers));
+
+        Car bert =  Car.withGasColorPassengers(5, "MattBlue");
+        // compares one car with bert
+        ToIntFunction<Car> compareWithBert = compareWithThis(bert, Car.getGasComparator());
+        for (Car c : cars) {
+            System.out.println(("comparing " + c + " with bert gives " + compareWithBert.applyAsInt(c)));
+        }
+        // all cars with more fuel than 5
+        showAll(getByCriterion(cars, comparesGreater(compareWithBert)));
 
 
 
