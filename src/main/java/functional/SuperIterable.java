@@ -1,9 +1,7 @@
 package functional;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
+import java.util.function.Function;
 import java.util.function.Predicate;
 
 public class SuperIterable<E> implements Iterable<E>{
@@ -24,6 +22,13 @@ public class SuperIterable<E> implements Iterable<E>{
     @Override
     public Iterator<E> iterator() {
         return self.iterator();
+    }
+
+    public <F> SuperIterable<F> map(Function<E, F> op) {
+        List<F> results = new ArrayList<>();
+        self.forEach(e -> results.add(op.apply(e)));
+        return new SuperIterable<>(results);
+
     }
 
     public SuperIterable<E> filter(Predicate<E> pred) {
@@ -52,5 +57,10 @@ public class SuperIterable<E> implements Iterable<E>{
         System.out.println("-------------------------------");
         upperCase.forEach(s -> System.out.println("> " + s));
 
+        System.out.println("-------------------------------");
+        strings.map(String::toUpperCase)
+                .forEach(System.out::println); // x -> System.out.println(x)
+
+        strings.forEach(s -> System.out.println("> " + s));
     }
 }
